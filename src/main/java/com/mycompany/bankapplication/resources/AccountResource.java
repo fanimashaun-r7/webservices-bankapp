@@ -7,6 +7,7 @@ package com.mycompany.bankapplication.resources;
 
 import com.mycompany.bankapplication.models.Account;
 import com.mycompany.bankapplication.services.AccountService;
+
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,42 +20,45 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
  * @author The Young CEO
  */
 @Path("/accounts")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class AccountResource {
-    
-    AccountService accountService = new AccountService();
-    
+
+    private AccountService accountService = new AccountService();
+
     @GET
-    public List<Account> getAccounts() {
-        return accountService.getAllAccounts();
+    public List<Account> getAccounts(@PathParam("customerId") int id) {
+        return accountService.getAllAccounts(id);
     }
-    
+
     @POST
-    public Account addAccount(Account account){
-        return accountService.addAccount(account);
+    public Account addAccount(@PathParam("customerId") int id, Account account) {
+        return accountService.addAccount(id, account);
     }
-        
+
     @DELETE
     @Path("/{accountId}")
-    public void removeAccount(@PathParam("accountId") int id){
-        accountService.removeAccount(id);
+    public void removeAccount(@PathParam("customerId") int id, @PathParam("accountId") int accountId) {
+        accountService.removeAccount(id, accountId);
     }
-    
+
     @PUT
     @Path("/{accountId}")
-    public Account updateAccount(@PathParam("accountId") int id, Account account){
-        account.setAccountId(id);
-        return accountService.updateAccountDetails(account);
+    public Account updateAccount(@PathParam("customerId") int id, @PathParam("accountId") int accountId, Account account) {
+        return accountService.updateAccountDetails(id, accountId, account);
     }
-    
+
     @GET
     @Path("/{accountId}")
-    public Account getAccount(@PathParam("accountId") int id) {
-        return accountService.getAccount(id);
+    public Account getAccount(@PathParam("customerId") int id, @PathParam("accountId") int accountId) {
+        return accountService.getAccount(id, accountId);
+    }
+
+    @Path("/{accountId}/transactions")
+    public TransactionResource getCustomerAccountTransactions() {
+        return new TransactionResource();
     }
 }

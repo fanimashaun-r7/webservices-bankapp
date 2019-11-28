@@ -5,6 +5,7 @@
  */
 package com.mycompany.bankapplication.resources;
 
+import com.mycompany.bankapplication.models.Account;
 import com.mycompany.bankapplication.models.Transaction;
 import com.mycompany.bankapplication.services.TransactionService;
 import java.util.List;
@@ -27,34 +28,35 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 public class TransactionResource {
     
-    TransactionService transactionService = new TransactionService();
-    
+    private TransactionService transactionService = new TransactionService();
+
     @GET
-    public List<Transaction> getTransactions() {
-        return transactionService.getAllTransactions();
+    public List<Transaction> getTransactions(@PathParam("accountId") int accountId) {
+        return transactionService.getAllTransactions(accountId);
     }
-    
+
+    @GET
+    @Path("/{transactionId}")
+    public Transaction getAccount(@PathParam("accountId") int accountId, @PathParam("transactionId") int transactionId) {
+        return transactionService.getTransaction(accountId, transactionId);
+    }
+
     @POST
-    public Transaction addTransaction(Transaction transaction){
-        return transactionService.addTransaction(transaction);
+    public Transaction addTransaction(@PathParam("accountId") int accountId, Transaction transaction){
+        return transactionService.addTransaction(accountId, transaction);
     }
-        
+
     @DELETE
     @Path("/{transactionId}")
-    public void removeTransaction(@PathParam("transactionId") int id){
-        transactionService.removeTransaction(id);
+    public void removeTransaction(@PathParam("transactionId") int transactionId, int id){
+        transactionService.removeTransaction(transactionId, id);
     }
-    
+
     @PUT
     @Path("/{transactionId}")
-    public Transaction updateTransaction(@PathParam("transactionId") int id, Transaction transaction){
+    public Transaction updateTransaction(@PathParam("accountId") int accountId, @PathParam("transactionId") int id, Transaction transaction){
         transaction.setTransactionId(id);
-        return transactionService.updateTransactionDetails(transaction);
+        return transactionService.updateTransactionDetails(accountId, id, transaction);
     }
-    
-    @GET
-    @Path("/{transactionId}")
-    public Transaction getTransaction(@PathParam("transactionId") int id) {
-        return transactionService.getTransaction(id);
-    }
+
 }

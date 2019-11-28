@@ -27,11 +27,13 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int customerId, String name, String address, String email, List<Account> accounts) {
+
+    public Customer(int customerId, String name, String address, String email, String securityCode, List<Account> accounts) {
         this.customerId = customerId;
         this.name = name;
         this.address = address;
         this.email = email;
+        this.securityCode = securityCode;
         this.accounts = accounts;
     }
 
