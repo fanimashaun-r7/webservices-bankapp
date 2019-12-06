@@ -47,11 +47,6 @@ public class TransactionResource {
         return transactionService.addTransaction(accountId, transaction);
     }
 
-    @POST
-    @Path("/transfer")
-    public Transfer addTransfer(@PathParam("accountId")int accountId, Transfer transfer){
-        return transactionService.transferMoney(accountId, transfer);
-    }
 
 
 
