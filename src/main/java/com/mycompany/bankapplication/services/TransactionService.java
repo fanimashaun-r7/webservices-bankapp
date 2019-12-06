@@ -7,8 +7,9 @@ package com.mycompany.bankapplication.services;
 
 import com.mycompany.bankapplication.database.Database;
 import com.mycompany.bankapplication.models.Transaction;
-import com.mycompany.bankapplication.models.Transfer;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,22 +29,26 @@ public class TransactionService {
         return db.getCustomerAccountTransactions(accountId).get(id - 1);
     }
 
-    public Transfer transferMoney(int accountId, Transfer transfer){
-        transfer.setTransactionId(db.getCustomerAccountTransactions(accountId).size() + 1);
-        db.getCustomerAccountTransactions(accountId).add(transfer);
+    public Transaction transferMoney(int accountId, Transaction transfer){
         db.withdraw(transfer.getCustomerId(),accountId, transfer.getTransactionAmount());
         db.lodge(transfer.getTransferCustomerId(),transfer.getTransferCustomerId(), transfer.getTransactionAmount());
+        transfer.setTransactionId(db.getCustomerAccountTransactions(accountId).size() + 1);
+        transfer.setAccountBalanceAfterTransaction(db.getCustomerAccounts(transfer.getCustomerId()).get(accountId).getCurrentBalance());
+        db.getCustomerAccountTransactions(accountId).add(transfer);
+
         return transfer;
     }
 
     public Transaction addTransaction(int accountId, Transaction transaction) {
         transaction.setTransactionId(db.getCustomerAccountTransactions(accountId).size() + 1);
-        db.getCustomerAccountTransactions(accountId).add(transaction);
+        transaction.setAccountBalanceAfterTransaction(db.getCustomerAccounts(transaction.getCustomerId()).get(accountId).getCurrentBalance());
+        transaction.setDateOfTransaction(new Date());
         if(transaction.getIsDebit()){
             db.withdraw(transaction.getCustomerId(),accountId, transaction.getTransactionAmount());
         }else{
             db.lodge(transaction.getCustomerId(),accountId, transaction.getTransactionAmount());
         }
+        db.getCustomerAccountTransactions(accountId).add(transaction);
         System.out.println("Transaction of id " + transaction.getTransactionId() + " was made!");
 
         return transaction;

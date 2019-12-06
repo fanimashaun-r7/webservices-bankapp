@@ -5,9 +5,7 @@
  */
 package com.mycompany.bankapplication.resources;
 
-import com.mycompany.bankapplication.models.Account;
 import com.mycompany.bankapplication.models.Transaction;
-import com.mycompany.bankapplication.models.Transfer;
 import com.mycompany.bankapplication.services.TransactionService;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -44,7 +42,11 @@ public class TransactionResource {
 
     @POST
     public Transaction addTransaction(@PathParam("accountId") int accountId, Transaction transaction){
-        return transactionService.addTransaction(accountId, transaction);
+        if(transaction.isTransfer()) {
+            return transactionService.transferMoney(accountId, transaction);
+        }else{
+            return transactionService.addTransaction(accountId, transaction);
+        }
     }
 
 

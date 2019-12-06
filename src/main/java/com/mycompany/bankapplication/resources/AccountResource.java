@@ -6,7 +6,7 @@
 package com.mycompany.bankapplication.resources;
 
 import com.mycompany.bankapplication.models.Account;
-import com.mycompany.bankapplication.models.Transfer;
+import com.mycompany.bankapplication.models.Transaction;
 import com.mycompany.bankapplication.services.AccountService;
 import com.mycompany.bankapplication.services.TransactionService;
 
@@ -30,7 +30,7 @@ import javax.ws.rs.core.MediaType;
 public class AccountResource {
 
     private AccountService accountService = new AccountService();
-    private TransactionService transactionService = new TransactionService();
+
 
     @GET
     public List<Account> getAccounts(@PathParam("customerId") int id) {
@@ -57,7 +57,9 @@ public class AccountResource {
     @GET
     @Path("/{accountId}")
     public Account getAccount(@PathParam("customerId") int id, @PathParam("accountId") int accountId) {
-        return accountService.getAccount(id, accountId);
+        Account custAcc = accountService.getAccount(id, accountId);
+        return custAcc;
+
     }
 
     @Path("/{accountId}/transactions")
@@ -65,10 +67,6 @@ public class AccountResource {
         return new TransactionResource();
     }
 
-    @POST
-    @Path("{accountId}/transfer")
-    public Transfer addTransfer(@PathParam("accountId")int accountId, Transfer transfer){
-        return transactionService.transferMoney(accountId, transfer);
-    }
+
 
 }

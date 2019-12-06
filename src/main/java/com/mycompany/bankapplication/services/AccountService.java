@@ -22,6 +22,7 @@ public class AccountService {
     }
 
     public Account getAccount(int customerId, int id) {
+
         return db.getCustomerAccounts(customerId).get(id - 1);
     }
 
