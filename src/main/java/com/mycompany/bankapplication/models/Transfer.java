@@ -6,8 +6,10 @@ public class Transfer extends Transaction {
     private int transferCustomerId;
     private int transferCustomerAccountId;
 
-    public Transfer(int transferCustomerId, int TransferCustomerAccountId) {
-        this.transferCustomerAccountId = transferCustomerAccountId;
+
+    public Transfer(int transferCustomerId, int TransferCustomerAccountId,int transactionId, int customerId, Boolean isDebit, Date dateOfTranaction, String description, float TransactionAmount) {
+        super(transactionId, customerId, isDebit, dateOfTranaction, description, TransactionAmount);
+        this.transferCustomerAccountId = TransferCustomerAccountId;
         this.transferCustomerId = transferCustomerId;
     }
 

@@ -49,7 +49,7 @@ public class TransactionResource {
 
     @POST
     @Path("/transfer")
-    public Transaction addTransfer(@PathParam("accountId")int accountId, Transfer transfer){
+    public Transfer addTransfer(@PathParam("accountId")int accountId, Transfer transfer){
         return transactionService.transferMoney(accountId, transfer);
     }
 
