@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author The Young CEO
+ * @author The Crazy CEO
  */
 public class Database {
 
@@ -26,27 +26,27 @@ public class Database {
     public Database() {
         if (init) {
             //Transactions for customer 1 -- start
-            Transaction transaction1 = new Transaction(transactionsDB.size() + 1, true, false, new Date(), "Ice Cream", 5);
+            Transaction transaction1 = new Transaction(transactionsDB.size() + 1,1, false, new Date(), "Ice Cream", 5);
             transactionsDB.add(transaction1);
 
-            Transaction transaction2 = new Transaction(transactionsDB.size() + 1, false, true, new Date(), "Birthday cake for dad", 25);
+            Transaction transaction2 = new Transaction(transactionsDB.size() + 1,2, true, new Date(), "Birthday cake for dad", 25);
             transactionsDB.add(transaction2);
 
-            Transaction transaction3 = new Transaction(transactionsDB.size() + 1, false, true, new Date(), "Playstation for brother", 450);
+            Transaction transaction3 = new Transaction(transactionsDB.size() + 1,3,true, new Date(), "Playstation for brother", 450);
             transactionsDB.add(transaction3);
 
-            Transaction transaction4 = new Transaction(transactionsDB.size() + 1, true, false, new Date(), "Coffee", 3);
+            Transaction transaction4 = new Transaction(transactionsDB.size() + 1,4,false, new Date(), "Coffee", 3);
             transactionsDB.add(transaction4);
             //Transactions for customer 1 -- end
 
             //Accounts for customer 1 -- start
-            Account account1 = new Account(accountsDB.size() + 1, "B3635", "4532 5609  9765", (float) 509.4, transactionsDB);
+            Account account1 = new Account(accountsDB.size() + 1,"current" ,"B3635", "4532 5609  9765", (float) 509.4, transactionsDB);
             accountsDB.add(account1);
 
-            Account account2 = new Account(accountsDB.size() + 1, "B87655", "5609 5609 6329 9765", (float) 595.55, transactionsDB);
+            Account account2 = new Account(accountsDB.size() + 1,"savings" , "B87655", "5609 5609 6329 9765", (float) 595.55, transactionsDB);
             accountsDB.add(account2);
 
-            Account account3 = new Account(accountsDB.size() + 1, "B3652335", "5609  6329 6329", (float) 95.15, transactionsDB);
+            Account account3 = new Account(accountsDB.size() + 1, "savings" ,"B3652335", "5609  6329 6329", (float) 95.15, transactionsDB);
             accountsDB.add(account3);
             //Accounts for customer 1 -- end
 
@@ -72,6 +72,16 @@ public class Database {
 
     public List<Customer> getCustomers() {
         return customersDB;
+    }
+
+    public void lodge(int custId,int accountId, float amount){
+        float currentBal = getCustomerAccounts(custId).get(accountId).getCurrentBalance();
+        getCustomerAccounts(custId).get(accountId).setCurrentBalance(currentBal + amount);
+    }
+
+    public void withdraw(int custId,int accountId, float amount){
+        float currentBal = getCustomerAccounts(custId).get(accountId).getCurrentBalance();
+        getCustomerAccounts(custId).get(custId).setCurrentBalance(currentBal - amount);
     }
 
     public List<Account> getCustomerAccounts(int customerNo) {

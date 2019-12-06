@@ -5,6 +5,7 @@ com\mycompany\bankapplication\services\AccountService.class
 com\mycompany\bankapplication\models\Transaction.class
 com\mycompany\bankapplication\models\Customer.class
 com\mycompany\bankapplication\resources\CustomerResource.class
+com\mycompany\bankapplication\models\Transfer.class
 com\mycompany\bankapplication\services\CustomerService.class
 com\mycompany\bankapplication\database\Database.class
 com\mycompany\bankapplication\models\Account.class
