@@ -29,10 +29,10 @@ public class Database {
     public Database() {
         if (init) {
             //Transactions for customer 1 -- start
-            Transaction transaction1 = new Transaction(transactionsDB.size() + 1,1, false ,true, new Date(), "Ice Cream", 5,509);
+            Transaction transaction1 = new Transaction(transactionsDB.size() + 1,1, false ,true, new Date(), "Ice Cream", 5,(float)509);
             transactionsDB.add(transaction1);
 
-            Transaction transaction2 = new Transaction(transactionsDB1.size() + 1,2, false,true, new Date(), "Birthday cake for dad", 25,  595);
+            Transaction transaction2 = new Transaction(transactionsDB1.size() + 1,2, false,true, new Date(), "Birthday cake for dad", 25,  (float)595);
             transactionsDB1.add(transaction2);
 //
 //            Transaction transaction3 = new Transaction(transactionsDB.size() + 1,3,true, new Date(), "Playstation for brother", 450);

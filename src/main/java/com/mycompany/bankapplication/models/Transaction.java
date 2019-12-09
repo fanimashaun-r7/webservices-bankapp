@@ -56,11 +56,6 @@ public class Transaction {
 
     }
 
-    public int getCustomerId() {
-        return customerId;
-    }
-
-
 
     public int getTransactionId() {
         return transactionId;
@@ -70,16 +65,28 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
+    public boolean isTransfer() {
+        return isTransfer;
+    }
+
+    public void setTransfer(boolean transfer) {
+        isTransfer = transfer;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
     public Boolean getIsDebit() {
         return isDebit;
     }
 
-    public float getAccountBalanceAfterTransaction() {
-        return accountBalanceAfterTransaction;
-    }
-
-    public void setAccountBalanceAfterTransaction(float accountBalanceAfterTransaction) {
-        this.accountBalanceAfterTransaction = accountBalanceAfterTransaction;
+    public void setIsDebit(Boolean debit) {
+        isDebit = debit;
     }
 
     public Date getDateOfTransaction() {
@@ -94,24 +101,25 @@ public class Transaction {
         return description;
     }
 
-    public boolean isTransfer() {
-        return isTransfer;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-
-    public Boolean isDebit() {
-        return isDebit;
-    }
-
 
     public float getTransactionAmount() {
         return TransactionAmount;
+    }
+
+    public void setTransactionAmount(float transactionAmount) {
+        TransactionAmount = transactionAmount;
     }
 
     public int getTransferCustomerId() {
         return transferCustomerId;
     }
 
+    public void setTransferCustomerId(int transferCustomerId) {
+        this.transferCustomerId = transferCustomerId;
+    }
 
     public int getTransferCustomerAccountId() {
         return transferCustomerAccountId;
@@ -121,4 +129,11 @@ public class Transaction {
         this.transferCustomerAccountId = transferCustomerAccountId;
     }
 
+    public float getAccountBalanceAfterTransaction() {
+        return accountBalanceAfterTransaction;
+    }
+
+    public void setAccountBalanceAfterTransaction(float accountBalanceAfterTransaction) {
+        this.accountBalanceAfterTransaction = accountBalanceAfterTransaction;
+    }
 }

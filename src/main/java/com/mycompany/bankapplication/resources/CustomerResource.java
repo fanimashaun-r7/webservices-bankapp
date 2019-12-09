@@ -54,7 +54,8 @@ public class CustomerResource {
     @GET
     @Path("/{customerId}")
     public Customer getCustomer(@PathParam("customerId") int id) {
-        return customerService.getCustomerById(id);
+        Customer customer =  customerService.getCustomerById(id);
+        return customer;
     }
 
     @Path("/{customerId}/accounts")
