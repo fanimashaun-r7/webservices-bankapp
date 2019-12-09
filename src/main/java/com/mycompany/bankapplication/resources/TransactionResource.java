@@ -42,6 +42,7 @@ public class TransactionResource {
 
     @POST
     public Transaction addTransaction(@PathParam("accountId") int accountId, Transaction transaction){
+        accountId = accountId-1;
         if(transaction.isTransfer()) {
             return transactionService.transferMoney(accountId, transaction);
         }else{

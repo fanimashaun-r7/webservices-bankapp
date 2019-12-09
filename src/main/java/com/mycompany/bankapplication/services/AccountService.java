@@ -27,10 +27,11 @@ public class AccountService {
     }
 
     public Account addAccount(int customerId, Account account) {
-        account.setAccountId(db.getCustomerAccounts(customerId).size() + 1);
-        db.getCustomerAccounts(customerId).add(account);
+        int accountId = db.getCustomerAccounts(customerId - 1).size() + 1;
+        account.setAccountId(accountId);
+        db.getCustomerAccounts(customerId - 1).add(account);
 
-        return account;
+        return db.getCustomerAccounts(customerId - 1).get(accountId - 1 );
     }
 
     public void removeAccount(int customerId, int id) {

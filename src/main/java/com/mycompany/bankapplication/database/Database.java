@@ -84,7 +84,7 @@ public class Database {
 
     public void withdraw(int custId,int accountId, float amount){
         float currentBal = getCustomerAccounts(custId).get(accountId).getCurrentBalance();
-        getCustomerAccounts(custId).get(custId).setCurrentBalance(currentBal - amount);
+        getCustomerAccounts(custId).get(accountId).setCurrentBalance(currentBal - amount);
     }
 
     public List<Account> getCustomerAccounts(int customerNo) {
