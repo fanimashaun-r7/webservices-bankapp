@@ -48,12 +48,15 @@ public class AccountResource {
     @DELETE
     @Path("/{accountId}")
     public void removeAccount(@PathParam("customerId") int id, @PathParam("accountId") int accountId) {
+        accountId = accountId - 1;
+        id = id - 1;
         accountService.removeAccount(id, accountId);
     }
 
     @PUT
     @Path("/{accountId}")
     public Account updateAccount(@PathParam("customerId") int id, @PathParam("accountId") int accountId, Account account) {
+        id = id - 1;
         return accountService.updateAccountDetails(id, accountId, account);
     }
 

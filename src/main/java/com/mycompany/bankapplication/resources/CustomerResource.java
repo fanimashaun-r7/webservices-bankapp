@@ -20,7 +20,7 @@ import javax.ws.rs.PUT;
 
 /**
  *
- * @author The Young CEO
+ * @author The Tick CEO
  */
 @Path("/customers")
 @Produces(MediaType.APPLICATION_JSON)

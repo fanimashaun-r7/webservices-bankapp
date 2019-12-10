@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author The Young CEO
+ * @author The Foolish CEO
  */
 @Path("/transactions")
 @Produces(MediaType.APPLICATION_JSON)
