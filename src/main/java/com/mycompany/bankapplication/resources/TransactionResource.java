@@ -31,12 +31,14 @@ public class TransactionResource {
 
     @GET
     public List<Transaction> getTransactions(@PathParam("accountId") int accountId) {
+        accountId=accountId-1;
         return transactionService.getAllTransactions(accountId);
     }
 
     @GET
     @Path("/{transactionId}")
     public Transaction getAccount(@PathParam("accountId") int accountId, @PathParam("transactionId") int transactionId) {
+        accountId = accountId-1;
         return transactionService.getTransaction(accountId, transactionId);
     }
 
