@@ -70,7 +70,7 @@ public class AccountResource {
 
     }
 
-    @Path("/{accountId}/transactions")
+    @Path("accounts/{accountId}/transactions")
     public TransactionResource getCustomerAccountTransactions() {
         return new TransactionResource();
     }

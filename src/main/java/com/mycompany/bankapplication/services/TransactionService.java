@@ -23,12 +23,12 @@ public class TransactionService {
     Database db = new Database();
     CustomerService cust = new CustomerService();
 
-    public List<Transaction> getAllTransactions(int accountId) {
-        return db.getCustomerAccountTransactions(accountId);
+    public List<Transaction> getAllTransactions(int customerId, int accountId) {
+        return db.getCustomers().get(customerId).getAccounts().get(accountId).getTransactions();
     }
 
-    public Transaction getTransaction(int accountId, int id) {
-        return db.getCustomerAccountTransactions(accountId).get(id - 1);
+    public Transaction getTransaction(int customerId ,int accountId, int id) {
+        return db.getCustomers().get(customerId).getAccounts().get(accountId).getTransactions().get(id);
     }
 
     public Transaction transferMoney(int accountId, Transaction transfer){

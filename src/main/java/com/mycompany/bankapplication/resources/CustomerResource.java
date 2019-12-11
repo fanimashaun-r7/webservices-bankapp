@@ -58,8 +58,14 @@ public class CustomerResource {
         return customer;
     }
 
-    @Path("/{customerId}/accounts")
+    @Path("/{customerId}/accounts/")
     public AccountResource getCustomerAccounts() {
         return new AccountResource();
     }
+
+    @Path("/{customerId}/accounts/{accountId}/transactions/")
+    public TransactionResource getCustomerAccountTransactions() {
+        return new TransactionResource();
+    }
+
 }

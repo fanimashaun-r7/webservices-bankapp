@@ -30,16 +30,19 @@ public class TransactionResource {
     private TransactionService transactionService = new TransactionService();
 
     @GET
-    public List<Transaction> getTransactions(@PathParam("accountId") int accountId) {
+    public List<Transaction> getTransactions(@PathParam("customerId") int customerId, @PathParam("accountId") int accountId) {
+        customerId = customerId - 1;
         accountId=accountId-1;
-        return transactionService.getAllTransactions(accountId);
+        return transactionService.getAllTransactions(customerId,accountId);
     }
 
     @GET
     @Path("/{transactionId}")
-    public Transaction getAccount(@PathParam("accountId") int accountId, @PathParam("transactionId") int transactionId) {
+    public Transaction getAccount(@PathParam("customerId") int customerId, @PathParam("accountId") int accountId, @PathParam("transactionId") int transactionId) {
         accountId = accountId-1;
-        return transactionService.getTransaction(accountId, transactionId);
+        customerId = customerId - 1;
+        transactionId = transactionId - 1;
+        return transactionService.getTransaction(customerId,accountId, transactionId);
     }
 
     @POST
