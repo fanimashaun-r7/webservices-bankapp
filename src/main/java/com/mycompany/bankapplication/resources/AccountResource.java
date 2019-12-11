@@ -34,6 +34,7 @@ public class AccountResource {
 
     @GET
     public List<Account> getAccounts(@PathParam("customerId") int id) {
+        id = id - 1;
         return accountService.getAllAccounts(id);
     }
 
@@ -63,6 +64,7 @@ public class AccountResource {
     @GET
     @Path("/{accountId}")
     public Account getAccount(@PathParam("customerId") int id, @PathParam("accountId") int accountId) {
+        id= id-1;
         Account custAcc = accountService.getAccount(id, accountId);
         return custAcc;
 
