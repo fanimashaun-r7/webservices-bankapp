@@ -70,7 +70,23 @@ public class TransactionService {
 
     public Transaction updateTransactionDetails(int accountId, int id, Transaction transaction) {
         transaction.setTransactionId(id);
-        db.getCustomerAccountTransactions(accountId).set(id - 1, transaction);
+        if(transaction.isTransfer()){
+            List <Customer> customers = cust.getAllCustomers();
+            db.withdraw(transaction.getCustomerId() - 1 ,accountId, transaction.getTransactionAmount());
+            db.lodge(transaction.getTransferCustomerId() - 1,transaction.getTransferCustomerAccountId() -1, transaction.getTransactionAmount());
+            transaction.setTransactionId(db.getCustomerAccountTransactions(accountId).size() + 1);
+            transaction.setAccountBalanceAfterTransaction(db.getCustomerAccounts(transaction.getCustomerId() - 1).get(accountId).getCurrentBalance());
+        }else {
+            float currentBAL;
+            if (transaction.getIsDebit()) {
+                currentBAL = db.getCustomers().get(transaction.getCustomerId() - 1).getAccounts().get(accountId).getCurrentBalance() - transaction.getTransactionAmount();
+            } else {
+                currentBAL = db.getCustomers().get(transaction.getCustomerId() - 1).getAccounts().get(accountId).getCurrentBalance() + transaction.getTransactionAmount();
+            }
+            db.getCustomers().get(transaction.getCustomerId() - 1).getAccounts().get(accountId).setCurrentBalance(currentBAL);
+            transaction.setAccountBalanceAfterTransaction(currentBAL);
+        }
+        db.getCustomerAccountTransactions(accountId).set(id, transaction);
         return transaction;
     }
 }

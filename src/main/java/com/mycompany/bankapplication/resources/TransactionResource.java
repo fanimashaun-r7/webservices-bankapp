@@ -57,14 +57,18 @@ public class TransactionResource {
 
     @DELETE
     @Path("/{transactionId}")
-    public void removeTransaction(@PathParam("transactionId") int transactionId, int id){
-        transactionService.removeTransaction(transactionId, id);
+    public void removeTransaction(@PathParam("accountId") int id, @PathParam("transactionId") int transactionId){
+        transactionId = transactionId - 1;
+        id = id - 1;
+        transactionService.removeTransaction(id, transactionId);
     }
 
     @PUT
     @Path("/{transactionId}")
     public Transaction updateTransaction(@PathParam("accountId") int accountId, @PathParam("transactionId") int id, Transaction transaction){
         transaction.setTransactionId(id);
+        id = id - 1;
+        accountId = accountId - 1;
         return transactionService.updateTransactionDetails(accountId, id, transaction);
     }
 

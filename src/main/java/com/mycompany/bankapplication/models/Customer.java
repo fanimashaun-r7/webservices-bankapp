@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author The Young CEO
+ * @author The cool CEO
  */
 @XmlRootElement
 public class Customer {
