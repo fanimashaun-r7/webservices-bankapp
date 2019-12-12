@@ -41,6 +41,7 @@ public class TransactionService {
         db.lodge(transCustId,transAccId, transfer.getTransactionAmount());
         transfer.setTransactionId(db.getCustomerAccountTransactions(custId,accountId).size() + 1);
         transfer.setAccountBalanceAfterTransaction(db.getCustomerAccounts(custId).get(accountId).getCurrentBalance());
+        transfer.setDateOfTransaction(new Date());
         db.getCustomerAccountTransactions(custId,accountId).add(transfer);
 
         return transfer;
