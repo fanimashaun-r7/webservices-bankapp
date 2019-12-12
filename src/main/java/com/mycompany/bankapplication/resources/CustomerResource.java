@@ -42,6 +42,7 @@ public class CustomerResource {
     @DELETE
     @Path("/{customerId}")
     public void removeCustomer(@PathParam("customerId") int id) {
+        id = id -1;
         customerService.removeCustomer(id);
     }
 

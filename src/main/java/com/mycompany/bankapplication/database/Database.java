@@ -9,7 +9,6 @@ import com.mycompany.bankapplication.models.Account;
 import com.mycompany.bankapplication.models.Customer;
 import com.mycompany.bankapplication.models.Transaction;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -92,7 +91,7 @@ public class Database {
     }
 
 
-    public List<Transaction> getCustomerAccountTransactions(int accountNo) {
-        return accountsDB.get(accountNo).getTransactions();
+    public List<Transaction> getCustomerAccountTransactions(int customerNo, int accountNo) {
+        return customersDB.get(customerNo).getAccounts().get(accountNo).getTransactions();
     }
 }

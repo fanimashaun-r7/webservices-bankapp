@@ -36,6 +36,9 @@ public class AccountService {
 
     public void removeAccount(int customerId, int id) {
         db.getCustomerAccounts(customerId).remove(id);
+        for(int i = 0; i<db.getCustomerAccounts(customerId).size(); i++){
+            db.getCustomerAccounts(customerId).get(i).setAccountId(i+1);
+        }
     }
 
     public Account updateAccountDetails(int customerId, int id, Account account) {

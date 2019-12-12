@@ -60,10 +60,11 @@ public class TransactionResource {
 
     @DELETE
     @Path("/{transactionId}")
-    public void removeTransaction(@PathParam("accountId") int id, @PathParam("transactionId") int transactionId){
+    public void removeTransaction(@PathParam("customerId") int customerId,@PathParam("accountId") int id, @PathParam("transactionId") int transactionId){
         transactionId = transactionId - 1;
         id = id - 1;
-        transactionService.removeTransaction(id, transactionId);
+        customerId = customerId - 1;
+        transactionService.removeTransaction(customerId, id, transactionId);
     }
 
     @PUT
