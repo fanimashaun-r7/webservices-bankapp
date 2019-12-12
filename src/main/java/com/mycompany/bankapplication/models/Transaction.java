@@ -5,6 +5,7 @@
  */
 package com.mycompany.bankapplication.models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -14,24 +15,47 @@ import java.util.Date;
 public class Transaction {
 
     private int transactionId;
-    private Boolean debit;
-    private Boolean credit;
-    private Date dateOfTranaction;
+    private boolean isTransfer;
+    private int customerId;
+    private Boolean isDebit;
+    private Date dateOfTransaction;
     private String description;
-    private float postTransactionBalance;
+    private float TransactionAmount;
+    private int transferCustomerId;
+    private int transferCustomerAccountId;
+    private float accountBalanceAfterTransaction;
 
-    public Transaction(int transactionId, Boolean debit, Boolean credit, Date dateOfTranaction, String description, float postTransactionBalance) {
+    public Transaction(int transactionId, int customerId, Boolean isTransfer, Boolean isDebit, Date dateOfTransaction, String description, float TransactionAmount,float accountBalanceAfterTransaction) {
         this.transactionId = transactionId;
-        this.debit = debit;
-        this.credit = credit;
-        this.dateOfTranaction = dateOfTranaction;
+        this.customerId = customerId;
+        this.isDebit = isDebit;
+        this.isTransfer = isTransfer;
+        this.dateOfTransaction = dateOfTransaction;
         this.description = description;
-        this.postTransactionBalance = postTransactionBalance;
+        this.TransactionAmount = TransactionAmount;
+        this.accountBalanceAfterTransaction = accountBalanceAfterTransaction;
     }
+
+    public Transaction(int transferCustomerId, int transferCustomerAccountId, int transactionId, int customerId, Boolean isTransfer, Boolean isDebit, Date dateOfTransaction, String description, float TransactionAmount, float accountBalanceAfterTransaction) {
+        this.transactionId = transactionId;
+        this.isDebit = isDebit;
+        this.customerId = customerId;
+        this.isTransfer = isTransfer;
+        this.dateOfTransaction = dateOfTransaction;
+        this.description = description;
+        this.TransactionAmount = TransactionAmount;
+        this.transferCustomerAccountId = transferCustomerAccountId;
+        this.transferCustomerId = transferCustomerId;
+        this.accountBalanceAfterTransaction = accountBalanceAfterTransaction;
+
+    }
+
+
 
     public Transaction() {
 
     }
+
 
     public int getTransactionId() {
         return transactionId;
@@ -41,28 +65,36 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
-    public Boolean getDebit() {
-        return debit;
+    public boolean isTransfer() {
+        return isTransfer;
     }
 
-    public void setDebit(Boolean debit) {
-        this.debit = debit;
+    public void setTransfer(boolean transfer) {
+        isTransfer = transfer;
     }
 
-    public Boolean getCredit() {
-        return credit;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCredit(Boolean credit) {
-        this.credit = credit;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
-    public Date getDateOfTranaction() {
-        return dateOfTranaction;
+    public Boolean getIsDebit() {
+        return isDebit;
     }
 
-    public void setDateOfTranaction(Date dateOfTranaction) {
-        this.dateOfTranaction = dateOfTranaction;
+    public void setIsDebit(Boolean debit) {
+        isDebit = debit;
+    }
+
+    public Date getDateOfTransaction() {
+        return dateOfTransaction;
+    }
+
+    public void setDateOfTransaction(Date dateOfTransaction) {
+        this.dateOfTransaction = dateOfTransaction;
     }
 
     public String getDescription() {
@@ -73,12 +105,35 @@ public class Transaction {
         this.description = description;
     }
 
-    public float getPostTransactionBalance() {
-        return postTransactionBalance;
+    public float getTransactionAmount() {
+        return TransactionAmount;
     }
 
-    public void setPostTransactionBalance(float postTransactionBalance) {
-        this.postTransactionBalance = postTransactionBalance;
+    public void setTransactionAmount(float transactionAmount) {
+        TransactionAmount = transactionAmount;
     }
 
+    public int getTransferCustomerId() {
+        return transferCustomerId;
+    }
+
+    public void setTransferCustomerId(int transferCustomerId) {
+        this.transferCustomerId = transferCustomerId;
+    }
+
+    public int getTransferCustomerAccountId() {
+        return transferCustomerAccountId;
+    }
+
+    public void setTransferCustomerAccountId(int transferCustomerAccountId) {
+        this.transferCustomerAccountId = transferCustomerAccountId;
+    }
+
+    public float getAccountBalanceAfterTransaction() {
+        return accountBalanceAfterTransaction;
+    }
+
+    public void setAccountBalanceAfterTransaction(float accountBalanceAfterTransaction) {
+        this.accountBalanceAfterTransaction = accountBalanceAfterTransaction;
+    }
 }

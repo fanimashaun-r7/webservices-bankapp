@@ -6,10 +6,9 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
-     
      
        <!-- <title>TODO supply a title</title> -->
         <meta charset="UTF-8">
@@ -18,9 +17,9 @@ and open the template in the editor.
     <body>
 
          <center>
-        <h1>Welcome to Customers Page</h1>
+        <h1>Welcome to Transaction Page</h1>
          </center>
-            <style>
+        <style>
         table {
           font-family: arial, sans-serif;
           border-collapse: collapse;
@@ -36,55 +35,50 @@ and open the template in the editor.
         tr:nth-child(even) {
           background-color: #dddddd;
         }
-        .hidetext { -webkit-text-security: disc; /* Default */ }
         </style>
         
-        <table  id="customer_table">
+        <table  id="transactions_table">
           <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Email</th>
-            <th>Accounts </th>
-            <th> Update Details </th>
-            <th> Delete Customer </th>
+            <th>Transaction ID</th>
+            <th>Customer ID</th>
+            <th>Debit</th>
+            <th>Description</th>
+            <th>Transaction Amount</th>
           </tr>  
         </table>
-      
-        
-         </center>
-     <script>
-                 function myFunction(id) {
-                     
-                     
-            document.getElementById("customer_table").deleteRow(id);
-        }
+             <script>    
+                    var params =  window.location.href;
+                    var query = window.location.search.substring(1);
+                    var vars = query.split("=");
+                    var id= vars[1];
+                    var cId = vars[2];
+                    var cz = vars[3];
    $(document).ready(function() {
    $.ajax({
-        url: "http://localhost:49000/api/customers"
+       //var tid =accounts.transactionId;
+       url: "http://localhost:49000/api/customers/"+id+"/accounts/"+cz+"/transactions"
+     //   url: "http://localhost:49000/api/customers/1/accounts/1/transactions"
+      
     }).then(function(data) {                    
                     var html = '';
                     var i;
                     for (i = 0; i < data.length; i++) {
                        html+='<tr>';
+                       html+='<td>'+data[i].transactionId+'</td>';
                        html+='<td>'+data[i].customerId+'</td>';
-                       html+='<td>'+data[i].name+'</td>';
-                       html+='<td>'+data[i].address+'</td>';
-                       html+='<td>'+data[i].email+'</td>';
-                      
-                        html+='<td><a href = "Accounts.html?id='+data[i].customerId+'"<button>View Accounts</button></a></td>'; 
-                        html+='<td><a href = "?id='+data[i].customerId+'"<button>To Update</button></a></td>';
-                     
-                        html+='<td><button onclick="myFunction('+data[i].customerId+')">Delete</button></td>' ;
-                        
-                      
-                  
+                       html+='<td>'+data[i].isDebit+'</td>';
+                       html+='<td>'+data[i].description+'</td>';
+                       html+='<td>'+data[i].transactionAmount+'</td>';
+                       
                     }
-                    $('#customer_table').append(html);
+                    $('#transactions_table').append(html);
                     
                 }); 
             });  
    
   </script>
+  
+
+
     </body>
 </html>

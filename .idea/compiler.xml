@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="webservices-bankapp" />
+        <module name="BankApplication" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="BankApplication" options="-endorseddirs &quot;C:\Users\The Young CEO\OneDrive - National College of Ireland\Desktop\webservies-bankapp\target/endorsed&quot;" />
+      <module name="webservices-bankapp" options="-endorseddirs &quot;C:\Users\YUZHA\OneDrive - National College of Ireland\Year 4\Semester 1\Web API Dev\BankApp\webservices-bankapp\target/endorsed&quot;" />
+    </option>
+  </component>
+</project>

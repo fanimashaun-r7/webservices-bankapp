@@ -20,7 +20,7 @@ import javax.ws.rs.PUT;
 
 /**
  *
- * @author The Young CEO
+ * @author The Tick CEO
  */
 @Path("/customers")
 @Produces(MediaType.APPLICATION_JSON)
@@ -42,6 +42,7 @@ public class CustomerResource {
     @DELETE
     @Path("/{customerId}")
     public void removeCustomer(@PathParam("customerId") int id) {
+        id = id -1;
         customerService.removeCustomer(id);
     }
 
@@ -54,11 +55,18 @@ public class CustomerResource {
     @GET
     @Path("/{customerId}")
     public Customer getCustomer(@PathParam("customerId") int id) {
-        return customerService.getCustomerById(id);
+        Customer customer =  customerService.getCustomerById(id);
+        return customer;
     }
 
-    @Path("/{customerId}/accounts")
+    @Path("/{customerId}/accounts/")
     public AccountResource getCustomerAccounts() {
         return new AccountResource();
     }
+
+    @Path("/{customerId}/accounts/{accountId}/transactions/")
+    public TransactionResource getCustomerAccountTransactions() {
+        return new TransactionResource();
+    }
+
 }

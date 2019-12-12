@@ -15,6 +15,7 @@ import java.util.List;
 public class Account {
 
     private int accountId;
+    private String accountType;
     private String sortCode;
     private String accountNo;
     private float currentBalance;
@@ -24,8 +25,9 @@ public class Account {
     public Account() {
     }
 
-    public Account(int accountId, String sortCode, String accountNo, float currentBalance, List<Transaction> transactions) {
+    public Account(int accountId, String accountType, String sortCode, String accountNo, float currentBalance, List<Transaction> transactions) {
         this.accountId = accountId;
+        this.accountType = accountType;
         this.sortCode = sortCode;
         this.accountNo = accountNo;
         this.currentBalance = currentBalance;
@@ -34,6 +36,14 @@ public class Account {
 
     public int getAccountId() {
         return accountId;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     public void setAccountId(int accountId) {

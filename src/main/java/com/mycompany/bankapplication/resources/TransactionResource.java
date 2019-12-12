@@ -5,7 +5,6 @@
  */
 package com.mycompany.bankapplication.resources;
 
-import com.mycompany.bankapplication.models.Account;
 import com.mycompany.bankapplication.models.Transaction;
 import com.mycompany.bankapplication.services.TransactionService;
 import java.util.List;
@@ -21,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author The Young CEO
+ * @author The Foolish CEO
  */
 @Path("/transactions")
 @Produces(MediaType.APPLICATION_JSON)
@@ -31,31 +30,49 @@ public class TransactionResource {
     private TransactionService transactionService = new TransactionService();
 
     @GET
-    public List<Transaction> getTransactions(@PathParam("accountId") int accountId) {
-        return transactionService.getAllTransactions(accountId);
+    public List<Transaction> getTransactions(@PathParam("customerId") int customerId, @PathParam("accountId") int accountId) {
+        customerId = customerId - 1;
+        accountId=accountId-1;
+        return transactionService.getAllTransactions(customerId,accountId);
     }
 
     @GET
     @Path("/{transactionId}")
-    public Transaction getAccount(@PathParam("accountId") int accountId, @PathParam("transactionId") int transactionId) {
-        return transactionService.getTransaction(accountId, transactionId);
+    public Transaction getAccount(@PathParam("customerId") int customerId, @PathParam("accountId") int accountId, @PathParam("transactionId") int transactionId) {
+        accountId = accountId-1;
+        customerId = customerId - 1;
+        transactionId = transactionId - 1;
+        return transactionService.getTransaction(customerId,accountId, transactionId);
     }
 
     @POST
     public Transaction addTransaction(@PathParam("accountId") int accountId, Transaction transaction){
-        return transactionService.addTransaction(accountId, transaction);
+        accountId = accountId-1;
+        if(transaction.isTransfer()) {
+            return transactionService.transferMoney(accountId, transaction);
+        }else{
+            return transactionService.addTransaction(accountId, transaction);
+        }
     }
+
+
+
 
     @DELETE
     @Path("/{transactionId}")
-    public void removeTransaction(@PathParam("transactionId") int transactionId, int id){
-        transactionService.removeTransaction(transactionId, id);
+    public void removeTransaction(@PathParam("customerId") int customerId,@PathParam("accountId") int id, @PathParam("transactionId") int transactionId){
+        transactionId = transactionId - 1;
+        id = id - 1;
+        customerId = customerId - 1;
+        transactionService.removeTransaction(customerId, id, transactionId);
     }
 
     @PUT
     @Path("/{transactionId}")
     public Transaction updateTransaction(@PathParam("accountId") int accountId, @PathParam("transactionId") int id, Transaction transaction){
         transaction.setTransactionId(id);
+        id = id - 1;
+        accountId = accountId - 1;
         return transactionService.updateTransactionDetails(accountId, id, transaction);
     }
 

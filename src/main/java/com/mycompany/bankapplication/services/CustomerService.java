@@ -33,7 +33,10 @@ public class CustomerService {
     }
 
     public void removeCustomer(int id) {
-        db.getCustomers().remove(id - 1);
+        db.getCustomers().remove(id);
+        for(int i = 0; i<db.getCustomers().size(); i++){
+            db.getCustomers().get(i).setCustomerId(i+1);
+        }
     }
 
     public Customer updateCustomerDetails(int id, Customer customer) {

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+     
+       <!-- <title>TODO supply a title</title> -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+         <center>
+        <h1>Welcome to Accounts Page</h1>
+         </center>
+            <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+        
+        <table  id="accounts_table">
+          <tr>
+            <th>Account Id</th>
+            <th>Account Number</th>
+            <th>Sort Code</th>
+            <th>Account Type</th>
+            <th>Current Balance</th>
+            <th>Transactions </th>
+          </tr>  
+        </table>
+        <script>
+   
+        var params =  window.location.href;
+        var query = window.location.search.substring(1);
+        var vars = query.split("=");
+        var customerid= vars[1];
+        
+        
+
+   $(document).ready(function() {
+   $.ajax({
+
+        url: "http://localhost:49000/api/customers/"+customerid+"/accounts"
+      // url: "http://localhost:49000/api/customers/1/accounts"
+      
+    }).then(function(data) {                    
+                    var html = '';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                       html+='<tr>';
+                       html+='<td>'+data[i].accountId+'</td>';
+                       html+='<td>'+data[i].accountNo+'</td>';
+                       html+='<td>'+data[i].sortCode+'</td>';
+                       html+='<td>'+data[i].accountType+'</td>';
+                       html+='<td>'+data[i].currentBalance+'</td>';
+                       html+='<td><a href = "Transactions1.html?id='+customerid+'=&cId='+data[i].accountId+'"<button>View Transactions</button></a></td>';
+                    }
+                    $('#accounts_table').append(html);
+                    
+                }); 
+            });  
+   
+  </script>
+  <script>
+      
+  </script>
+
+    </body>
+</html>
