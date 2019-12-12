@@ -21,9 +21,9 @@ public class AccountService {
         return db.getCustomerAccounts(customerId);
     }
 
-    public Account getAccount(int customerId, int id) {
+    public Account getAccount(int customerId, int accountId) {
 
-        return db.getCustomerAccounts(customerId).get(id - 1);
+        return db.getCustomerAccounts(customerId).get(accountId);
     }
 
     public Account addAccount(int customerId, Account account) {

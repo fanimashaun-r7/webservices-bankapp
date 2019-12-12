@@ -65,8 +65,20 @@ public class AccountResource {
     @Path("/{accountId}")
     public Account getAccount(@PathParam("customerId") int id, @PathParam("accountId") int accountId) {
         id= id-1;
+        accountId = accountId - 1;
         Account custAcc = accountService.getAccount(id, accountId);
         return custAcc;
+
+    }
+
+    @GET
+    @Path("/{accountId}/balance")
+    public String getAccountBalance(@PathParam("customerId") int id, @PathParam("accountId") int accountId) {
+        accountId = accountId - 1;
+        id = id - 1;
+        float accountBalance = accountService.getAccount(id, accountId).getCurrentBalance();
+        String bal = "Your account balance is "+accountBalance;
+        return bal;
 
     }
 
